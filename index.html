@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="description" content="Vinícius Buri Lux construiu um sistema que transforma os dados públicos do PNCP em inteligência sobre gastos municipais. 21 mil contratos analisados. Escala para todo o Brasil.">
 <title>LuxVerso — Monitor de Gastos Públicos</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,6 +27,8 @@ body {
   color: var(--text);
   font-family: 'Syne', sans-serif;
   line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ── HERO ─────────────────────────────────────────────────────────────────── */
@@ -35,8 +37,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 60px 24px;
-  max-width: 760px;
+  padding: 80px 24px;
+  max-width: 800px;
   margin: 0 auto;
   position: relative;
 }
@@ -48,13 +50,14 @@ body {
   background: rgba(0,232,122,0.08);
   border: 1px solid rgba(0,232,122,0.2);
   border-radius: 100px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--green);
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   margin-bottom: 32px;
   width: fit-content;
+  text-transform: uppercase;
 }
 .hero-tag::before {
   content: '';
@@ -68,50 +71,57 @@ body {
 }
 
 .hero h1 {
-  font-size: clamp(36px, 6vw, 64px);
+  font-size: clamp(40px, 10vw, 72px);
   font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -1px;
-  margin-bottom: 24px;
+  line-height: 1.0;
+  letter-spacing: -2px;
+  margin-bottom: 28px;
 }
 .hero h1 .accent { color: var(--green); }
 
 .hero .lead {
-  font-size: clamp(16px, 2.5vw, 20px);
+  font-size: clamp(18px, 3vw, 22px);
   color: var(--muted2);
-  max-width: 560px;
-  margin-bottom: 40px;
+  max-width: 600px;
+  margin-bottom: 48px;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 .hero .lead strong { color: var(--text); font-weight: 600; }
 
 .cta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
 }
 .btn-primary {
   background: var(--green);
   color: #000;
-  padding: 14px 28px;
-  border-radius: 8px;
+  padding: 16px 32px;
+  border-radius: 12px;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
 }
-.btn-primary:hover { opacity: 0.85; }
+.btn-primary:active { transform: scale(0.98); }
+
 .btn-secondary {
   background: transparent;
   color: var(--text);
-  padding: 14px 28px;
-  border-radius: 8px;
+  padding: 16px 32px;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
   text-decoration: none;
   border: 1px solid var(--border);
-  transition: border-color 0.2s;
+  transition: all 0.2s;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
 }
 .btn-secondary:hover { border-color: var(--green); color: var(--green); }
 
@@ -120,34 +130,38 @@ body {
   background: var(--surface);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 40px 24px;
+  padding: 60px 24px;
 }
 .numbers-inner {
-  max-width: 760px;
+  max-width: 800px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 20px;
 }
+@media(min-width: 768px) {
+  .numbers-inner { grid-template-columns: repeat(4, 1fr); }
+}
+
 .num-item .val {
   font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(32px, 5vw, 44px);
   font-weight: 500;
   color: var(--green);
   line-height: 1;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 .num-item .desc {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted2);
   line-height: 1.4;
 }
 
 /* ── SEÇÕES ───────────────────────────────────────────────────────────────── */
 section {
-  max-width: 760px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 72px 24px;
+  padding: 80px 24px;
 }
 .section-tag {
   font-family: 'JetBrains Mono', monospace;
@@ -155,106 +169,115 @@ section {
   letter-spacing: 3px;
   color: var(--green);
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  display: block;
 }
 section h2 {
-  font-size: clamp(24px, 4vw, 36px);
+  font-size: clamp(28px, 5vw, 42px);
   font-weight: 700;
-  line-height: 1.15;
-  margin-bottom: 20px;
-  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
 }
 section p {
   color: var(--muted2);
-  font-size: 16px;
+  font-size: clamp(16px, 2.5vw, 18px);
   line-height: 1.7;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 section p strong { color: var(--text); }
 
 /* ── O QUE É ──────────────────────────────────────────────────────────────── */
 .what-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 16px;
-  margin-top: 32px;
+  margin-top: 40px;
 }
-@media(max-width:520px){ .what-grid { grid-template-columns: 1fr; } }
+@media(min-width: 600px) { .what-grid { grid-template-columns: 1fr 1fr; } }
+
 .what-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 16px;
+  padding: 28px;
+  transition: border-color 0.3s;
 }
-.what-card .icon { font-size: 24px; margin-bottom: 10px; }
-.what-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-.what-card p { font-size: 13px; color: var(--muted2); margin: 0; }
+.what-card:hover { border-color: rgba(0,232,122,0.3); }
+.what-card .icon { font-size: 32px; margin-bottom: 16px; }
+.what-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+.what-card p { font-size: 15px; color: var(--muted2); margin: 0; line-height: 1.6; }
 
 /* ── ACHADOS ──────────────────────────────────────────────────────────────── */
 .findings {
   background: var(--surface);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 72px 24px;
+  padding: 80px 24px;
 }
-.findings-inner { max-width: 760px; margin: 0 auto; }
-.finding-list { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+.findings-inner { max-width: 800px; margin: 0 auto; }
+.finding-list { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
 .finding {
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px 24px;
+  border-radius: 16px;
+  padding: 28px;
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 16px;
   background: var(--bg);
 }
+@media(min-width: 600px) {
+  .finding { flex-direction: row; gap: 24px; }
+}
+
 .finding-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--green);
   background: rgba(0,232,122,0.08);
   border: 1px solid rgba(0,232,122,0.15);
-  border-radius: 6px;
-  padding: 4px 10px;
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: fit-content;
   flex-shrink: 0;
-  margin-top: 2px;
 }
-.finding h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-.finding p { font-size: 14px; color: var(--muted2); margin: 0; line-height: 1.5; }
+.finding h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+.finding p { font-size: 16px; color: var(--muted2); margin: 0; line-height: 1.6; }
 .finding p strong { color: var(--amber); }
 
 /* ── PARA QUEM ────────────────────────────────────────────────────────────── */
 .for-whom-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  margin-top: 28px;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 40px;
 }
-@media(max-width:580px){ .for-whom-grid { grid-template-columns: 1fr; } }
+@media(min-width: 768px) { .for-whom-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
 .fw-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 16px;
+  padding: 28px;
 }
-.fw-card .fw-icon { font-size: 28px; margin-bottom: 12px; }
-.fw-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-.fw-card p { font-size: 13px; color: var(--muted2); margin: 0; line-height: 1.5; }
+.fw-card .fw-icon { font-size: 36px; margin-bottom: 16px; }
+.fw-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+.fw-card p { font-size: 15px; color: var(--muted2); margin: 0; line-height: 1.6; }
 
 /* ── ESCALA ───────────────────────────────────────────────────────────────── */
 .scale-bar {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 24px;
-  margin-top: 28px;
+  border-radius: 16px;
+  padding: 32px;
+  margin-top: 32px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted2);
-  line-height: 2;
 }
-.scale-bar .step { display: flex; align-items: center; gap: 12px; }
-.scale-bar .step::before { content: '→'; color: var(--green); flex-shrink:0; }
+.scale-bar .step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+.scale-bar .step:last-child { margin-bottom: 0; }
+.scale-bar .step::before { content: '→'; color: var(--green); flex-shrink:0; margin-top: 2px; }
 .scale-bar .step strong { color: var(--text); }
 
 /* ── CONTATO ──────────────────────────────────────────────────────────────── */
@@ -263,69 +286,89 @@ section p strong { color: var(--text); }
   border-top: 1px solid var(--border);
 }
 .contact-inner {
-  max-width: 760px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 72px 24px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  align-items: start;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
 }
-@media(max-width:600px){ .contact-inner { grid-template-columns: 1fr; } }
+@media(min-width: 768px) {
+  .contact-inner { flex-direction: row; justify-content: space-between; align-items: center; }
+}
+
+.contact-content { flex: 1; }
 .contact-inner h2 {
-  font-size: clamp(22px, 4vw, 32px);
+  font-size: clamp(32px, 6vw, 48px);
   font-weight: 700;
-  margin-bottom: 12px;
-  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+  letter-spacing: -1.5px;
 }
-.contact-inner p { font-size: 15px; color: var(--muted2); margin-bottom: 24px; }
-.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-inner p { font-size: 18px; color: var(--muted2); margin-bottom: 32px; max-width: 480px; }
+
+.contact-links { display: flex; flex-direction: column; gap: 16px; }
 .contact-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   text-decoration: none;
   color: var(--text);
-  font-size: 14px;
-  transition: color 0.15s;
+  font-size: 16px;
+  transition: color 0.2s;
 }
 .contact-link:hover { color: var(--green); }
 .contact-link .cl-icon {
-  width: 36px; height: 36px;
+  width: 44px; height: 44px;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 20px;
   flex-shrink: 0;
 }
-.avatar-block { text-align: center; }
+
+.avatar-block { 
+  text-align: center; 
+  padding: 32px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
 .avatar {
-  width: 80px; height: 80px;
+  width: 100px; height: 100px;
   background: linear-gradient(135deg, var(--green), #00a854);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  margin: 0 auto 12px;
+  font-size: 40px;
+  margin: 0 auto 20px;
   font-weight: 800;
   color: #000;
 }
-.avatar-name { font-size: 14px; font-weight: 700; }
-.avatar-role { font-size: 12px; color: var(--muted2); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+.avatar-name { font-size: 18px; font-weight: 700; }
+.avatar-role { font-size: 13px; color: var(--muted2); margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
 
 /* ── FOOTER ───────────────────────────────────────────────────────────────── */
 footer {
   border-top: 1px solid var(--border);
-  padding: 20px 24px;
+  padding: 40px 24px;
   text-align: center;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   color: var(--muted);
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  line-height: 2;
+}
+
+@media(max-width: 480px) {
+  .hero { padding-top: 60px; padding-bottom: 60px; }
+  .cta-row .btn-primary, .cta-row .btn-secondary { width: 100%; flex: none; }
 }
 </style>
 </head>
@@ -336,7 +379,7 @@ footer {
   <div class="hero-tag">LUXVERSO RESEARCH · DADOS ABERTOS</div>
   <h1>O dinheiro público<br>municipal, <span class="accent">visível.</span></h1>
   <p class="lead">
-    Construí um sistema que coleta, organiza e analisa <strong>todos os contratos diretos das prefeituras brasileiras</strong> — em escala, de forma automática, a partir de dados públicos que existem mas ninguém usa direito.
+    Construí um sistema que coleta, organiza e analisa <strong>todos os contratos diretos das prefeituras brasileiras</strong> — em escala, de forma automática.
   </p>
   <div class="cta-row">
     <a href="#contato" class="btn-primary">Falar sobre parceria →</a>
@@ -357,7 +400,7 @@ footer {
     </div>
     <div class="num-item">
       <div class="val">273</div>
-      <div class="desc">municípios monitorados<br>automaticamente</div>
+      <div class="desc">municípios com<br>dados extraídos</div>
     </div>
     <div class="num-item">
       <div class="val">5 min</div>
@@ -368,13 +411,13 @@ footer {
 
 <!-- O QUE É -->
 <section>
-  <div class="section-tag">O que foi construído</div>
+  <span class="section-tag">O que foi construído</span>
   <h2>Um radar de gastos públicos municipais — automático.</h2>
   <p>
     O governo publica tudo no <strong>Portal Nacional de Contratações Públicas (PNCP)</strong>. Mas os dados são difíceis de usar: estão espalhados, sem classificação, em formatos que exigem conhecimento técnico para extrair.
   </p>
   <p>
-    Construí um pipeline que faz esse trabalho automaticamente: coleta, limpa, classifica e organiza os contratos por categoria — shows, saúde, consultoria, locação, obras. Tudo com flags de qualidade para separar contratos municipais reais de ruído.
+    Construí um pipeline que faz esse trabalho automaticamente: coleta, limpa, classifica e organiza os contratos por categoria. Tudo com flags de qualidade para separar contratos municipais reais de ruído.
   </p>
   <div class="what-grid">
     <div class="what-card">
@@ -384,17 +427,17 @@ footer {
     </div>
     <div class="what-card">
       <div class="icon">🏷️</div>
-      <h3>Classificação por categoria</h3>
+      <h3>Classificação</h3>
       <p>Cada contrato recebe uma categoria: artístico, saúde, consultoria, locação, manutenção...</p>
     </div>
     <div class="what-card">
       <div class="icon">🧹</div>
-      <h3>Curadoria de qualidade</h3>
-      <p>Flags automáticos identificam outliers, órgãos estaduais e falsos positivos — sem excluir dados.</p>
+      <h3>Curadoria</h3>
+      <p>Flags automáticos identificam outliers e falsos positivos — garantindo dados limpos.</p>
     </div>
     <div class="what-card">
       <div class="icon">📊</div>
-      <h3>Dataset pronto para análise</h3>
+      <h3>Dataset pronto</h3>
       <p>CSV estruturado, com colunas padronizadas. Abre em qualquer ferramenta de análise.</p>
     </div>
   </div>
@@ -403,7 +446,7 @@ footer {
 <!-- ACHADOS -->
 <div class="findings" id="achados">
   <div class="findings-inner">
-    <div class="section-tag">Achados reais · Bahia 2025–2026</div>
+    <span class="section-tag">Achados reais · Bahia 2025–2026</span>
     <h2>O que os dados revelam.</h2>
     <div class="finding-list">
 
@@ -411,7 +454,7 @@ footer {
         <span class="finding-num">01</span>
         <div>
           <h3>R$ 629 milhões em shows e artistas — só na Bahia em 2025</h3>
-          <p>Prefeituras baianas gastaram <strong>R$ 629 milhões</strong> em contratações artísticas via inexigibilidade de licitação. São 5.937 contratos, 273 municípios. O São João é uma indústria financiada pelo poder público — e ninguém mapeia isso em escala.</p>
+          <p>Prefeituras baianas gastaram <strong>R$ 629 milhões</strong> em contratações artísticas via inexigibilidade de licitação. O São João é uma indústria financiada pelo poder público — e ninguém mapeia isso em escala.</p>
         </div>
       </div>
 
@@ -419,7 +462,7 @@ footer {
         <span class="finding-num">02</span>
         <div>
           <h3>Cidades pequenas pagam mais que capitais — por artista</h3>
-          <p>Paulo Afonso (BA) gastou <strong>R$ 14,8M</strong> em 68 contratos artísticos. Feira de Santana, <strong>R$ 14,7M</strong>. Salvador municipal aparece em 7º. Municípios do interior contratam diretamente cada artista — cidades grandes terceirizam via produtoras, o que oculta os valores reais.</p>
+          <p>Paulo Afonso (BA) gastou <strong>R$ 14,8M</strong> em 68 contratos artísticos. Feira de Santana, <strong>R$ 14,7M</strong>. Municípios do interior contratam diretamente cada artista, o que revela valores que cidades grandes ocultam via produtoras.</p>
         </div>
       </div>
 
@@ -427,7 +470,7 @@ footer {
         <span class="finding-num">03</span>
         <div>
           <h3>Consultoria e assessoria: R$ 58 bilhões em inexigibilidade</h3>
-          <p>O maior volume do dataset não é show — é <strong>consultoria jurídica, contábil e assessoria técnica</strong>. Contratadas diretamente, sem licitação. Esse mercado de R$ 58 bilhões na Bahia em 2025 é praticamente invisível na discussão pública.</p>
+          <p>O maior volume do dataset não é show — é <strong>consultoria jurídica, contábil e assessoria técnica</strong>. Esse mercado de R$ 58 bilhões na Bahia em 2025 é praticamente invisível na discussão pública.</p>
         </div>
       </div>
 
@@ -435,7 +478,7 @@ footer {
         <span class="finding-num">04</span>
         <div>
           <h3>2026: São João já sendo contratado desde janeiro</h3>
-          <p>Nos primeiros 4 meses de 2026, <strong>R$ 153M</strong> em contratos artísticos já foram publicados. Ana Castela, Calcinha Preta, Zé Neto e Cristiano, Xand Avião — com município, data e valor exatos. O São João 2026 está sendo contratado agora, em tempo real.</p>
+          <p>Nos primeiros 4 meses de 2026, <strong>R$ 153M</strong> em contratos artísticos já foram publicados. O São João 2026 está sendo contratado agora, em tempo real.</p>
         </div>
       </div>
 
@@ -445,7 +488,7 @@ footer {
 
 <!-- PARA QUEM -->
 <section>
-  <div class="section-tag">Para quem faz sentido</div>
+  <span class="section-tag">Para quem faz sentido</span>
   <h2>Você tem audiência. Eu tenho os dados.</h2>
   <p>
     Não estou buscando espaço. Estou buscando quem já tem distribuição e pode usar essa infraestrutura para gerar impacto real.
@@ -454,41 +497,41 @@ footer {
     <div class="fw-card">
       <div class="fw-icon">📰</div>
       <h3>Jornalismo de dados</h3>
-      <p>Pautas prontas com dados verificáveis. Coleta automatizada que pode ser atualizada para qualquer reportagem investigativa.</p>
+      <p>Pautas prontas com dados verificáveis. Coleta automatizada para reportagens investigativas.</p>
     </div>
     <div class="fw-card">
       <div class="fw-icon">🔍</div>
-      <h3>Transparência & controle</h3>
-      <p>Dataset estruturado para monitoramento de gastos municipais. Identifica padrões e anomalias que não aparecem nas auditorias manuais.</p>
+      <h3>Transparência</h3>
+      <p>Dataset estruturado para monitoramento. Identifica padrões que não aparecem em auditorias manuais.</p>
     </div>
     <div class="fw-card">
       <div class="fw-icon">🎓</div>
       <h3>Pesquisa aplicada</h3>
-      <p>Base histórica de inexigibilidades para estudos de economia política, comportamento eleitoral e alocação orçamentária municipal.</p>
+      <p>Base histórica de inexigibilidades para estudos de economia política e alocação orçamentária.</p>
     </div>
   </div>
 </section>
 
 <!-- ESCALA -->
 <section style="padding-top:0;">
-  <div class="section-tag">Potencial</div>
+  <span class="section-tag">Potencial</span>
   <h2>Bahia é o piloto. Brasil é o projeto.</h2>
   <p>
-    O pipeline já funciona para qualquer estado. A lógica é a mesma — só muda o filtro de UF. Isso significa que o que foi construído na Bahia pode cobrir todos os 5.570 municípios brasileiros com ajuste mínimo.
+    O pipeline já funciona para qualquer estado. O que foi construído na Bahia pode cobrir todos os 5.570 municípios brasileiros com ajuste mínimo.
   </p>
   <div class="scale-bar">
     <div class="step"><span><strong>Hoje:</strong> Bahia 2025–2026 · 21.797 contratos · pipeline rodando</span></div>
-    <div class="step"><span><strong>Próximo:</strong> outros estados · coleta paralela · monitoramento mensal automático</span></div>
-    <div class="step"><span><strong>Horizonte:</strong> Brasil inteiro · alertas em tempo real · API pública de consulta</span></div>
+    <div class="step"><span><strong>Próximo:</strong> outros estados · coleta paralela · monitoramento mensal</span></div>
+    <div class="step"><span><strong>Horizonte:</strong> Brasil inteiro · alertas em tempo real · API pública</span></div>
   </div>
 </section>
 
 <!-- CONTATO -->
 <div class="contact-section" id="contato">
   <div class="contact-inner">
-    <div>
+    <div class="contact-content">
       <h2>Vamos conversar.</h2>
-      <p>Se o que você leu faz sentido para o seu trabalho, quero entender como podemos colaborar. Sem pitch longo — manda mensagem e a gente descobre se há fit.</p>
+      <p>Se o que você leu faz sentido para o seu trabalho, quero entender como podemos colaborar.</p>
       <div class="contact-links">
         <a href="mailto:viniburilux@gmail.com" class="contact-link">
           <span class="cl-icon">✉️</span>
@@ -498,7 +541,7 @@ footer {
           <span class="cl-icon">💬</span>
           WhatsApp · +55 85 99979-8762
         </a>
-        <a href="https://www.linkedin.com/in/vinicius-buri-46597792" class="contact-link" target="_blank">
+        <a href="https://www.linkedin.com/in/vinicius-buri-lux-201b1a1a/" class="contact-link" target="_blank">
           <span class="cl-icon">🔗</span>
           LinkedIn · Vinícius Buri Lux
         </a>
@@ -514,7 +557,7 @@ footer {
 </div>
 
 <footer>
-  LUXVERSO RESEARCH · DADOS: PNCP — PORTAL NACIONAL DE CONTRATAÇÕES PÚBLICAS · 2025–2026
+  LUXVERSO RESEARCH · DADOS: PNCP · 2025–2026
 </footer>
 
 </body>
